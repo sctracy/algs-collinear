@@ -1,6 +1,6 @@
 
 public class Brute {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
         // rescale coordinates and turn on animation mode
         StdDraw.setXscale(0, 32768);
@@ -22,15 +22,16 @@ public class Brute {
         }
         
         for (int i = 0; i < N; i++)
-        	for (int j = i+1; j < N; j++)
-        		for (int k = j+1; k < N; k++)
-        			for (int l = k+1; l < N; l++) {
-        				if (a[i].slopeTo(a[j]) == a[i].slopeTo(a[k]) &&
-        						a[i].slopeTo(a[j]) == a[i].slopeTo(a[l])) {
-        					StdOut.println(a[i].toString() + " -> " + a[j].toString() + " -> " + a[k].toString() + " -> " + a[l].toString());
-        					a[i].drawTo(a[l]);
-        				}
-        			}
+            for (int j = i+1; j < N; j++)
+                for (int k = j+1; k < N; k++)
+                    for (int l = k+1; l < N; l++)
+                        if (a[i].slopeTo(a[j]) == a[i].slopeTo(a[k])
+                                && a[i].slopeTo(a[j]) == a[i].slopeTo(a[l])) {
+                            StdOut.println(a[i].toString() + " -> "
+                                    + a[j].toString() + " -> " + a[k].toString() 
+                                    + " -> " + a[l].toString());
+                            a[i].drawTo(a[l]);
+                        }
         
         // display to screen all at once
         StdDraw.show(0);
