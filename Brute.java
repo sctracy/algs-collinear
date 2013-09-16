@@ -1,4 +1,6 @@
 
+import java.util.Arrays;
+
 public class Brute {
     public static void main(String[] args) {
 
@@ -20,6 +22,8 @@ public class Brute {
             a[i] = p;
             p.draw();
         }
+
+        Arrays.sort(a);
         
         for (int i = 0; i < N; i++)
             for (int j = i+1; j < N; j++)
