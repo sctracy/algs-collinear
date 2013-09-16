@@ -54,8 +54,8 @@ public class Fast {
                             break;
                     if (k >= i) {
                         aux[i].drawTo(aux[tail-1]);
-                        String output = "";
-                        for (int l = i; l < tail-1; l++)
+                        String output = aux[i].toString() + " -> ";
+                        for (int l = head; l < tail-1; l++)
                             output += (aux[l].toString() + " -> ");
                         output += aux[tail-1].toString();
                         StdOut.println(output);
