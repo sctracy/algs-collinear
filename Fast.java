@@ -40,8 +40,8 @@ public class Fast {
             
             while (tail < N) {
                 /* if equal slopes encountered, just move tail forward */
-                while (tail < N 
-                        && aux[i].slopeTo(aux[head]) == aux[i].slopeTo(aux[tail]))
+                double headSlope = aux[i].slopeTo(aux[head]);
+                while (tail < N && headSlope == aux[i].slopeTo(aux[tail]))
                     tail++;
                 /* on slopes not equal, check if we have a segment */
                 if (tail - head >= 3) {
@@ -49,8 +49,7 @@ public class Fast {
                     /* make sure it's not a duplicate or overlapping one */
                     int k;
                     for (k = 0; k < i; k++)
-                        if (aux[k].slopeTo(aux[i])
-                                == aux[i].slopeTo(aux[head]))
+                        if (aux[k].slopeTo(aux[i]) == headSlope)
                             break;
                     if (k >= i) {
                         aux[i].drawTo(aux[tail-1]);
