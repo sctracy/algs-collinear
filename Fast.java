@@ -30,14 +30,17 @@ public class Fast {
         
         Point[] aux = new Point[N];
         /* use one point each as the origin, sort the array using slope order */
-        /* once all the segments related with the point is over, just leave it */
         for (int i = 0; i < N-3; i++) {
             for (int j = i; j < N; j++)
                 aux[j] = a[j];
+
+            /* sort points before and after point[i] by slope */
             Arrays.sort(aux, i+1, N, aux[i].SLOPE_ORDER);
+            Arrays.sort(aux, 0, i, aux[i].SLOPE_ORDER);
+
             int head = i+1;
             int tail = i+2;
-            
+            int pHead = 0;
             while (tail < N) {
                 /* if equal slopes encountered, just move tail forward */
                 double headSlope = aux[i].slopeTo(aux[head]);
@@ -47,11 +50,13 @@ public class Fast {
                 if (tail - head >= 3) {
                     /* we have a segment here */
                     /* make sure it's not a duplicate or overlapping one */
-                    int k;
-                    for (k = 0; k < i; k++)
-                        if (aux[k].slopeTo(aux[i]) == headSlope)
-                            break;
-                    if (k >= i) {
+                    double pSlope = Double.NEGATIVE_INFINITY;
+                    while (pHead < i) {
+                        pSlope = aux[i].slopeTo(aux[pHead]);
+                        if (pSlope < headSlope) pHead++;
+                        else                    break;
+                    }
+                    if (pSlope != headSlope) {
                         aux[i].drawTo(aux[tail-1]);
                         String output = aux[i].toString() + " -> ";
                         for (int l = head; l < tail-1; l++)
